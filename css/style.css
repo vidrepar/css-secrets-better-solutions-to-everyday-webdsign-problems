@@ -1,3 +1,117 @@
-div{
-    color: red;
+
+
+
+/* Flexible background positioning via extended background-position */
+div {
+	background: url(http://csssecrets.io/images/code-pirate.svg)
+	            no-repeat bottom right #58a;
+	background-origin: content-box; /* Offsets position as much as the value of padding; so there is only one place to change the value */
+
+	/* Styling */
+	max-width: 10em;
+	min-height: 5em;
+	padding: 40px;
+	color: white;
+	font: 100%/1 sans-serif;
+}
+
+/* Multiple borders */
+div {
+	width: 100px;
+	height: 60px;
+	margin: 25px;
+	border-radius: 50%;
+	background: yellowgreen;
+	box-shadow: 0 0 0 10px #655,
+            0 0 0 13px rgba(0,0,0,0),
+            0 0 0 16px deeppink,
+            0 0 0 20px rgba(0,0,0,.6);
+}
+
+/* inherit keyword */
+input, select, button {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+}
+
+.callout {
+    position: relative;
+}
+
+.callout::before {
+    content: "";
+    position: absolute;
+    top: -.4em; left: 1em;
+    padding: .35em;
+    background: inherit;
+    border: inherit;
+    border-right: 0;
+    border-bottom: 0;
+    transform: rotate(45deg);
+}
+
+/* currentColor */
+hr {
+    height: .5em;
+    background: currentColor;
+}
+
+/* hsla button variations */
+.hsla-button.ok {
+    background-color: #c00;
+}
+
+.hsla-button.cancel {
+    background-color: #6b0;
+}
+
+/* hsla instead of rgba */
+.hsla-button {
+    padding: .3em .8em;
+    border: 1px solid rgba(0, 0, 0, .1);
+    background: #58a linear-gradient(hsla(0, 0%, 100%, .2), transparent);
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+    color: white;
+    text-shadow: 0 -.05em -.05em rgba(0,0,0,.5);
+    font-size: 125%;
+    line-height: 1.5;
+}
+
+/* Relative units, scaling */
+.minimize-button-relative {
+    padding: .3em .8em;
+    border: 1px solid #446d88;
+    background: #58a linear-gradient(#77a0bb, #58a);
+    border-radius: .2em;
+    box-shadow: 0 .05em .25em gray;
+    color: white;
+    text-shadow: 0 -.05em .05em #335166;
+    font-size: 125%;
+    line-height: 1.5;
+}
+
+
+/* Minimize code duplication */
+.minimize-button{
+    padding: 6px 16px;
+    border: 1px solid #446d88;
+    background: #58a linear-gradient(#77a0bb, #58a);
+    border-radius: 4px;
+    box-shadow: 0 1px 5px gray;
+    color: white;
+    text-shadow: 0 -1px 1px #335166;
+    /*font-size: 20px;*/
+    font-size: 125%; /* assuming 16px font-size */
+    /*line-height: 30px;*/
+    line-height: 1.5;
+}
+
+
+ /* Test */
+body{
+    background: lightgray;
 }
