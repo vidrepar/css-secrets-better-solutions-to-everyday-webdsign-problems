@@ -1,4 +1,371 @@
 
+
+/**
+ * Animated pie chart
+ */
+
+.pie {
+	width: 100px; height: 100px;
+	border-radius: 50%;
+	background: yellowgreen;
+	background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+	color: #655;
+}
+
+.pie::before {
+	content: '';
+	display: block;
+	margin-left: 50%;
+	height: 100%;
+	border-radius: 0 100% 100% 0 / 50%;
+	background-color: inherit;
+	transform-origin: left;
+	animation: spin 3s linear infinite, bg 6s step-end infinite;
+}
+
+@keyframes spin {
+	to { transform: rotate(.5turn); }
+}
+@keyframes bg {
+	50% { background: currentColor; }
+}
+
+/**
+ * Trapezoid tabs ( 3D transforms - partial support )
+ */
+
+body {
+	padding: 40px;
+	font: 130%/2 Frutiger LT Std, sans-serif;
+}
+
+nav {
+	position: relative;
+	z-index: 1;
+	padding-left: 1em;
+}
+
+nav > a {
+	position: relative;
+	display: inline-block;
+	padding: .3em 1em 0;
+	color: inherit;
+	text-decoration: none;
+	margin: 0 -.3em;
+}
+
+nav > a::before,
+main {
+	border: .1em solid rgba(0,0,0,.4);
+}
+
+nav a::before {
+	content: ''; /* To generate the box */
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	z-index: -1;
+	border-bottom: none;
+	border-radius: .5em .5em 0 0;
+	background: #ccc linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,0));
+	box-shadow: 0 .15em white inset;
+	transform: scale(1.1, 1.3) perspective(.5em) rotateX(5deg);
+	transform-origin: bottom;
+}
+
+nav a.selected { z-index: 2;}
+
+nav a.selected::before {
+	background-color: #eee;
+	margin-bottom: -.08em;
+}
+
+main {
+	display: block;
+	margin-bottom: 1em;
+	background: #eee;
+	padding: 1em;
+	border-radius: .15em;
+}
+
+nav.left > a::before {
+	transform: scale(1.2, 1.3) perspective(.5em) rotateX(5deg);
+	transform-origin: bottom left;
+}
+
+nav.right { padding-left: 2em; }
+
+nav.right > a::before {
+	transform: scale(1.2, 1.3) perspective(.5em) rotateX(5deg);
+	transform-origin: bottom right;
+}
+
+
+/**
+ * Beveled corners — with clip-path ( bad support )
+ */
+
+div {
+	background: #58a;
+	-webkit-clip-path:
+		polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px),
+		calc(100% - 20px) 100%,
+		20px 100%, 0 calc(100% - 20px), 0 20px);
+	clip-path:
+	 		polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px),
+	 		calc(100% - 20px) 100%,
+	 		20px 100%, 0 calc(100% - 20px), 0 20px);
+
+	padding: 1em 1.2em;
+	max-width: 12em;
+	color: white;
+	font: 150%/1.6 Baskerville, Palatino, serif;
+}
+
+
+/**
+ * Beveled corners — with border-image and an inline SVG
+ */
+
+div {
+	border: 21px solid transparent;
+	border-image: 1 url('data:image/svg+xml,\
+	                      <svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" fill="%2358a">\
+	                      <polygon points="0,1 1,0 2,0 3,1 3,2 2,3 1,3 0,2" />\
+	                      </svg>');
+	background: #58a;
+	background-clip: padding-box;
+
+	padding: .2em .3em;
+	max-width: 12em;
+	color: white;
+	font: 150%/1.6 Baskerville, Palatino, serif;
+}
+
+
+/**
+ * Scoop ( inner border radius ) corners
+ *
+ */
+
+div {
+	background: #58a;
+	background:	radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
+	            radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
+	            radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
+	            radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+	padding: 1em 1.2em;
+	max-width: 12em;
+	color: white;
+	font: 130%/1.6 Baskerville, Palatino, serif;
+}
+
+
+/**
+ * Beveled ( cutout ) corners — with gradients
+ * Use preprocessor mixin to make it more maintainable
+ */
+
+div {
+	background: #58a;
+	background: linear-gradient(135deg, transparent 15px, #58a 0) top left,
+	            linear-gradient(-135deg, transparent 15px, #58a 0) top right,
+	            linear-gradient(-45deg, transparent 15px, #58a 0) bottom right,
+	            linear-gradient(45deg, transparent 15px, #58a 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+
+	padding: 1em 1.2em;
+	max-width: 12em;
+	color: white;
+	font: 150%/1.6 Baskerville, Palatino, serif;
+}
+
+/**
+ * Diamond images — via clip-path
+ */
+
+ /* Bad browser support as of April 2017 */
+
+img {
+	max-width: 250px;
+	margin: 20px;
+	-webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+	clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+	transition: 1s;
+}
+
+img:hover {
+	-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/**
+ * Diamond images — via transforms
+ */
+
+.diamond {
+	width: 250px;
+	height: 250px;
+	transform: rotate(45deg);
+	overflow: hidden;
+	margin: 100px;
+}
+
+.diamond img {
+	max-width: 100%;
+	transform: rotate(-45deg) scale(1.42);
+	z-index: -1;
+	position: relative;
+}
+
+/**
+ * Parallelograms — with pseudoelements
+ */
+
+.button {
+	position: relative;
+	display: inline-block;
+	padding: .5em 1em;
+	border: 0; margin: .5em;
+	background: transparent;
+	color: white;
+	text-transform: uppercase;
+	text-decoration: none;
+	font: bold 200%/1 sans-serif;
+}
+
+.button::before {
+	content: ''; /* To generate the box */
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+	z-index: -1;
+	background: #58a;
+	transform: skew(45deg);
+}
+
+/**
+ * Flexible quarter ellipse
+ */
+
+div {
+	display: inline-block;
+	width: 16em;
+	height: 10em;
+	margin: 1em;
+	background: #fb3;
+	border-radius: 100% 0 0 0;
+}
+
+div:nth-of-type(2) { border-radius: 0 100% 0 0; }
+div:nth-of-type(3) { border-radius: 0 0 100% 0; }
+div:nth-of-type(4) { border-radius: 0 0 0 100%; }
+
+/**
+ * Flexible half ellipse
+ */
+
+div {
+	display: inline-block;
+	width: 16em;
+	height: 10em;
+	margin: 1em;
+	background: #fb3;
+	border-radius: 50% / 100% 100% 0 0;
+}
+
+div:nth-of-type(2) { border-radius: 50% / 0 0 100% 100%; }
+div:nth-of-type(3) { border-radius: 100% 0 0 100% / 50%; }
+div:nth-of-type(4) { border-radius: 0 100% 100% 0 / 50%; }
+
+/**
+ * Flexible ellipse
+ */
+
+div {
+	width: 16em;
+	height: 10em;
+	background: #fb3;
+	border-radius: 50%;
+}
+
+/**
+ * Footnote-style border
+ */
+
+.footnote {
+	border-top: .15em solid transparent;
+	border-image: 100% 0 0 linear-gradient(90deg, currentColor 4em, transparent 0);
+	padding-top: .5em;
+	font: 220%/1.4 Baskerville, Palatino, serif;
+}
+
+/**
+ * Marching ants border
+ */
+
+@keyframes ants { to { background-position: 100% 100% } }
+
+div {
+	padding: 1em;
+	border: 1px solid transparent;
+	background: linear-gradient(white, white) padding-box,
+	            repeating-linear-gradient(-45deg, black 0, black 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+	animation: ants 12s linear infinite;
+
+	max-width: 20em;
+	font: 100%/1.6 Baskerville, Palatino, serif;
+}
+
+/**
+ * Vintage envelope themed border via border-image
+ */
+
+div {
+	padding: 1em;
+	border: 16px solid transparent;
+	border-image: 16 repeating-linear-gradient(-45deg, red 0, red 1em, transparent 0, transparent 2em,
+	              #58a 0, #58a 3em, transparent 0, transparent 4em);
+
+	max-width: 20em;
+	font: 100%/1.6 Baskerville, Palatino, serif;
+}
+
+/**
+ * Vintage envelope themed border
+ */
+
+div {
+	padding: 1em;
+	border: 1em solid transparent;
+	background: linear-gradient(white, white) padding-box,
+	            repeating-linear-gradient(-45deg, red 0, red 12.5%, transparent 0, transparent 25%,
+	              #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0 / 6em 6em;
+
+	max-width: 20em;
+	font: 100%/1.6 Baskerville, Palatino, serif;
+}
+
+/**
+ * Continuous image borders
+ */
+
+div {
+	border: 1em solid transparent;
+	background: linear-gradient(white, white) padding-box,
+	            url(http://csssecrets.io/images/stone-art.jpg) border-box  0 / cover;
+
+	/* Styling & enable resize */
+	width: 21em;
+	padding: 1em;
+	overflow: hidden;
+	resize: both;
+	font: 100%/1.6 Baskerville, Palatino, serif;
+}
+
+
 div {
 	/**
 	 * Pseudorandom stripes
