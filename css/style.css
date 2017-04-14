@@ -1,6 +1,672 @@
 
 
 
+
+/**
+ * Animation along a circular path - Solution 2
+ */
+
+@keyframes spin {
+	from {
+		transform: rotate(0turn)
+		           translateY(-150px) translateY(50%)
+		           rotate(1turn)
+	}
+	to {
+		transform: rotate(1turn)
+		           translateY(-150px) translateY(50%)
+		           rotate(0turn);
+	}
+}
+
+
+.avatar {
+	animation: spin 3s infinite linear;
+}
+
+/* Anything below this is just styling */
+
+.avatar {
+	display: block;
+	width: 50px;
+	margin: calc(50% - 25px) auto 0;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.path {
+	width: 300px; height: 300px;
+	padding: 20px;
+	margin: 100px auto;
+	border-radius: 50%;
+	background: #fb3;
+}
+
+/**
+ * Animation along a circular path - Solution 1
+ */
+
+@keyframes spin {
+	to { transform: rotate(1turn); }
+}
+
+.avatar {
+	animation: spin 3s infinite linear;
+	transform-origin: 50% 150px;
+}
+
+.avatar > img {
+	animation: inherit;
+	animation-direction: reverse;
+}
+
+/* Anything below this is just styling */
+
+.avatar {
+	width: 50px;
+	margin: 0 auto;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.avatar > img {
+	display: block;
+	width: inherit;
+}
+
+.path {
+	width: 300px; height: 300px;
+	padding: 20px;
+	border-radius: 50%;
+	background: #fb3;
+}
+
+/**
+ * Smooth state animations
+ * Photo credits: https://www.flickr.com/photos/employtheskinnyboy/3904743709
+ */
+
+@keyframes panoramic {
+	to { background-position: 100% 0; }
+}
+
+.panoramic {
+	width: 150px; height: 150px;
+	background: url('http://c3.staticflickr.com/3/2671/3904743709_74bc76d5ac_b.jpg');
+	background-size: auto 100%;
+	animation: panoramic 10s linear infinite alternate;
+	animation-play-state: paused;
+}
+
+.panoramic:hover, .panoramic:focus {
+	animation-play-state: running;
+}
+
+
+/**
+ * Frame-by-frame animations
+ */
+
+@keyframes loader {
+	to { background-position: -800px 0; }
+}
+
+.loader {
+	width: 100px; height: 100px;
+	text-indent: 999px; overflow: hidden; /* Hide text */
+	background: url(http://dabblet.com/img/loader.png) 0 0;
+	animation: loader 1s infinite steps(8);
+}
+
+
+/**
+ * Blinking
+ */
+
+@keyframes blink-1 { 50% { color: transparent } }
+@keyframes blink-2 { to { color: transparent } }
+
+p {
+	padding: 1em;
+	background: gold;
+}
+
+.blink-smooth-1 {
+	animation: 1s blink-1 3;
+}
+
+.blink-smooth-2 {
+	animation: .5s blink-2 6;
+	animation-direction: alternate;
+}
+
+.blink {
+	animation: 1s blink-1 3 steps(1);
+}
+
+
+/**
+ * Elastic color
+ */
+
+
+html {
+	background: rgb(100%, 0%, 40%);
+	transition: 1s cubic-bezier(.25,.1,.2,3);
+}
+
+html:hover {
+	background: gray;
+}
+
+/**
+ * Elastic transitions
+ */
+
+input:not(:focus) + .callout:not(:hover) {
+	transform: scale(0);
+	transition: .25s transform;
+}
+
+.callout {
+	transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;
+	transform-origin: 1.4em -.4em;
+}
+
+/* Styling */
+body {
+	padding: 1.5em;
+	font: 200%/1.6 Baskerville;
+}
+
+input {
+	display: block;
+	padding: 0 .4em;
+	font: inherit;
+}
+
+.callout {
+	position: absolute;
+	max-width: 14em;
+	padding: .6em .8em;
+	border-radius: .3em;
+	margin: .3em 0 0 -.2em;
+	background: #fed;
+	border: 1px solid rgba(0,0,0,.3);
+	box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+	font-size: 75%;
+}
+
+.callout:before {
+	content: "";
+	position: absolute;
+	top: -.4em;
+	left: 1em;
+	padding: .35em;
+	background: inherit;
+	border: inherit;
+	border-right: 0;
+	border-bottom: 0;
+	transform: rotate(45deg);
+}
+
+
+/**
+ * Bouncing animation
+ */
+
+@keyframes bounce {
+	60%, 80%, to {
+		transform: translateY(400px);
+		animation-timing-function: ease;
+	}
+	70% { transform: translateY(300px); }
+	90% { transform: translateY(360px); }
+}
+
+.ball {
+	width: 0; height: 0; padding: 1.5em;
+	border-radius: 50%;
+	margin: auto;
+	background: red radial-gradient(at 30% 30%, #fdd, red);
+	animation: bounce 2s cubic-bezier(.1,.25,1,.25) forwards;
+}
+
+body {
+	background: linear-gradient(skyblue, white 450px, yellowgreen 0);
+	min-height: 100vh;
+}
+
+
+/**
+ * Sticky footer with flexible height
+ */
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	flex: 1;
+}
+
+/* Toggle checkbox to alternate between short/long content */
+#contents:checked ~ p { display: none }
+
+/* Basic styling */
+body {
+	margin: 0;
+	font: 100%/1.5 Baskerville, Palatino Linotype, Palatino, serif;
+}
+
+h1 { margin: .5em 0 0; }
+
+header { text-align: center; height: 3em; }
+
+main, footer {
+	display: block;
+	padding: .5em calc(50% - 400px);
+}
+
+footer {
+	background: linear-gradient(#222, #444);
+	color: white;
+}
+
+
+/**
+ * Sticky footer with fixed height
+ */
+
+main {
+	min-height: calc(100vh - 5em - 7em);
+}
+
+/* Toggle checkbox to alternate between short/long content */
+#contents:checked ~ p { display: none }
+
+/* Basic styling */
+body {
+	margin: 0;
+	font: 100%/1.5 Palatino Linotype, Palatino, serif;
+}
+
+h1 { margin: .5em 0 0; }
+
+header { text-align: center; height: 3em; }
+
+main, footer {
+	display: block;
+	padding: .5em calc(50% - 400px);
+}
+
+footer {
+	background: linear-gradient(#222, #444);
+	color: white;
+	height: 6em;
+}
+
+
+/**
+ * Vertical centering - absolute positioning method
+ */
+
+main {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	padding: 1em 1.5em;
+	box-sizing: border-box;
+	background: #655;
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	margin: 0 0 .2em;
+	font-size: 150%;
+}
+
+p {
+	margin: 0;
+}
+
+body {
+	background: #fb3;
+	font: 100%/1.5 sans-serif;
+}
+
+/**
+ * Vertical centering - Viewport unit method
+ */
+
+main {
+	width: 18em;
+	padding: 1em 1.5em;
+	margin: 50vh auto 0;
+	transform: translateY(-50%);
+	box-sizing: border-box;
+	background: #655;
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	margin: 0 0 .2em;
+	font-size: 150%;
+}
+
+p {
+	margin: 0;
+}
+
+body {
+	background: #fb3;
+	font: 100%/1.5 sans-serif;
+}
+
+/**
+ * Vertical centering - Flexbox solution
+ */
+
+* { margin: 0 }
+
+body {
+	display: flex;
+	min-height: 100vh;
+}
+
+main {
+	padding: 1em 2em;
+	margin: auto;
+	box-sizing: border-box;
+	background: #655;
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: .2em;
+	font-size: 150%;
+}
+
+body {
+	background: #fb3;
+	font: 100%/1.5 sans-serif;
+}
+
+
+/**
+ * Vertical centering - Flexbox solution for text
+ */
+
+body {
+	display: flex;
+	align-items: center;
+	min-height: 100%;
+	margin: 0;
+}
+
+html { height: 100% }
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 18em;
+	height: 10em;
+	padding: 1em 1.5em;
+	margin: 0 auto;
+	box-sizing: border-box;
+	background: #655;
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	margin: 0 0 .2em;
+	font-size: 150%;
+}
+
+p {
+	margin: 0;
+}
+
+body {
+	background: #fb3;
+	font: 100%/1.5 sans-serif;
+}
+
+/**
+ * Styling by sibling count: Color palette example
+ */
+
+/* Hide "color" 4 items or more */
+.palette li:first-child:nth-last-child(n+4) .color-options a:after,
+.palette li:first-child:nth-last-child(n+4) ~ li .color-options a:after {
+	content: none;
+}
+
+/* Hide word when 6 items or more */
+.palette li:first-child:nth-last-child(n+6) .color-options a,
+.palette li:first-child:nth-last-child(n+6) ~ li .color-options a {
+	color: transparent;
+	font-size: 0;
+}
+
+.palette li:only-child .delete {
+	display:none;
+}
+
+/* From this point it’s just styling */
+.palette {
+	display: flex;
+	height: 200px;
+	max-width:900px;
+	font: bold 90%/1 sans-serif;
+}
+
+	.palette li {
+		flex: 1;
+		list-style: none;
+		background: #D6E055;
+	}
+
+		.color-options {
+			background: rgba(0,0,0,.5);
+			padding: 10px;
+			margin: 0 10px;
+			overflow:hidden;
+			border-radius:0 0 10px 10px;
+		}
+
+			.color-options .add { float:left; }
+			.color-options .delete { float:right; }
+
+			.color-options a {
+				color: white;
+				text-decoration:none;
+			}
+
+			.color-options a:before {
+				display:inline-block;
+				font-size: 1rem;
+				width:1.3rem;
+				margin-right:.3rem;
+				text-align: center;
+				line-height: 1.3;
+				background:white;
+				border-radius: 50%;
+				letter-spacing: normal;
+			}
+
+			.color-options .add:before {
+				content:'✚';
+				color:#590;
+			}
+
+			.color-options .delete:before {
+				content:'✖';
+				color:#b00;
+			}
+
+			.color-options a:after {
+				content: ' color';
+				font-weight: normal;
+			}
+
+
+/**
+ * Taming table column widths
+ */
+
+body { background: #ddd }
+
+section {
+	width: 500px;
+	margin: 2em;
+	background: white;
+}
+
+table {
+	border-collapse: collapse;
+	margin-bottom: 1em;
+	width: 100%;
+}
+
+section + section table { table-layout: fixed }
+
+td {
+	border: 1px solid #aaa;
+}
+
+td.preformatted {
+	white-space: pre;
+	font-family: Consolas, Monaco, monospace;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+
+/**
+ * Intrinsic sizing - bad support, but gracefull fallback provided
+ */
+
+figure {
+	max-width: 300px;
+	max-width: min-content;
+	margin: auto;
+}
+
+figure > img { max-width: inherit }
+
+/* Basic styling */
+
+figure {
+	padding: 10px;
+	border: 1px solid silver;
+}
+
+
+/**
+ * Interactive image comparison - with CSS resize
+ */
+
+.image-slider {
+	position:relative;
+	display: inline-block;
+}
+
+.image-slider > div {
+	position: absolute;
+	top: 0; bottom: 0; left: 0;
+	width: 50%;
+	max-width: 100%;
+	overflow: hidden;
+	resize: horizontal;
+}
+
+.image-slider > div:before {
+	content: '';
+	position: absolute;
+	right: 0; bottom: 0;
+	width: 12px; height: 12px;
+	padding: 5px;
+	background: linear-gradient(-45deg, white 50%, transparent 0);
+	background-clip: content-box;
+	cursor: ew-resize;
+	-webkit-filter: drop-shadow(0 0 2px black);
+	filter: drop-shadow(0 0 2px black);
+}
+
+.image-slider img {
+	display: block;
+	user-select: none;
+}
+
+/**
+ * Scrolling hints
+ */
+
+ul {
+	display: inline-block;
+	overflow: auto;
+	width: 7.2em;
+	height: 7em;
+	border: 1px solid silver;
+	padding: .3em .5em;
+	list-style: none;
+	margin-top: 2em;
+	font: 100 200%/1.6 'Frutiger LT Std', sans-serif;
+	background: linear-gradient(white 15px, hsla(0,0%,100%,0)) 0 0 / 100% 50px,
+	            radial-gradient(at top, rgba(0,0,0,.2), transparent 70%) 0 0 / 100% 15px,
+	            linear-gradient(to top, white 15px, hsla(0,0%,100%,0)) bottom / 100% 50px,
+	            radial-gradient(at bottom, rgba(0,0,0,.2), transparent 70%) bottom / 100% 15px;
+	background-repeat: no-repeat;
+	background-attachment: local, scroll, local, scroll;
+	margin-top: 30px;
+}
+
+
+/**
+ * De-emphasizing by blurring (AND dimming)
+ */
+
+main {
+	transition: .6s;
+	background: white;
+}
+
+main.de-emphasized {
+	-webkit-filter: blur(3px);
+	filter: blur(3px);
+}
+
+dialog {
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 1;
+	width: 10em;
+	padding: 2em;
+	margin: -5em;
+	border: 1px solid silver;
+	border-radius: .5em;
+	box-shadow: 0 .2em .5em rgba(0,0,0,.5),
+	            0 0 0 100vmax rgba(0,0,0,.2);
+}
+
+dialog:not([open]) {
+	display: none;
+}
+
+body {
+	font: 150%/1.6 Baskerville, Palatino, serif;
+}
+
 /**
  * Native modal dialog (limited support)
  */
